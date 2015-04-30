@@ -1,6 +1,8 @@
 # Package Subscribo OmnipaySubscriboShared 
 
-#### is extending functionality of [Omnipay Common](https://github.com/thephpleague/omnipay-common) and providing shared functionality for some Omnipay drivers.
+###### is extending functionality of [Omnipay Common](https://github.com/thephpleague/omnipay-common) and providing shared functionality for some Omnipay drivers.
+
+[![Build Status](https://travis-ci.org/Subscribo/omnipay-subscribo-shared.svg?branch=master)](https://travis-ci.org/Subscribo/omnipay-subscribo-shared)
 
 - PSR-7 Message sending using Guzzle client currently (April 2015) used by Omnipay Common
 - Added support for widget-based workflow
