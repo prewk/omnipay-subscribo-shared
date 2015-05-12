@@ -145,6 +145,15 @@ class SharedAbstractRequestTestCase extends TestCase
         $this->assertNull($this->request->getCard());
     }
 
+
+    public function testSetCardEmptyArray()
+    {
+        $this->assertNull($this->request->getCard());
+        $this->assertSame($this->request, $this->request->setCard([]));
+        $this->assertNull($this->request->getCard());
+    }
+
+
     public function testSetCardCreditCard()
     {
         $this->assertNull($this->request->getCard());
@@ -204,6 +213,14 @@ class SharedAbstractRequestTestCase extends TestCase
         $this->assertSame('20', $firstItem->getTaxPercent());
         $this->assertSame(5, $firstItem->getFlags());
         $this->assertSame($this->request, $this->request->setItems(null));
+        $this->assertNull($this->request->getItems());
+    }
+
+
+    public function testSetItemsEmptyArray()
+    {
+        $this->assertNull($this->request->getItems());
+        $this->assertSame($this->request, $this->request->setItems([]));
         $this->assertNull($this->request->getItems());
     }
 

@@ -33,6 +33,8 @@ abstract class AbstractRequest extends Base
             if (( ! ($value instanceof ExtendedCreditCard))) {
                 $value = new ExtendedCreditCard($value);
             }
+        } else {
+            $value = null;
         }
         return $this->setParameter('card', $value);
     }
@@ -50,6 +52,8 @@ abstract class AbstractRequest extends Base
             if (( ! ($items instanceof ExtendedItemBag))) {
                 $items = new ExtendedItemBag($items);
             }
+        } else {
+            $items = null;
         }
         return $this->setParameter('items', $items);
     }
