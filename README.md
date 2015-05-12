@@ -20,7 +20,7 @@ You might need to add dependency to development version of egeloen/http-adapter 
 
 ```json
     "require": {
-        "subscribo/omnipay-subscribo-shared": "^0.2.2",
+        "subscribo/omnipay-subscribo-shared": "^0.2.3",
         "egeloen/http-adapter": "^0.8@dev"
     }
 ```
