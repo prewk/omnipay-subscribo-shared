@@ -7,8 +7,9 @@ use Omnipay\Common\CreditCard;
 use Omnipay\Common\ItemBag;
 use Subscribo\Omnipay\Shared\CreditCard as ExtendedCreditCard;
 use Subscribo\Omnipay\Shared\ItemBag as ExtendedItemBag;
-use Subscribo\PsrHttpMessageTools\Factories\RequestFactory;
 use Subscribo\Omnipay\Shared\Message\AbstractRequest;
+use Subscribo\Omnipay\Shared\Traits\HttpMessageSendingTrait;
+use Subscribo\PsrHttpMessageTools\Factories\RequestFactory;
 use Guzzle\Plugin\Mock\MockPlugin;
 
 
@@ -341,6 +342,8 @@ class SharedAbstractRequestTestCase extends TestCase
 
 class ExtendedAbstractRequestForTesting extends AbstractRequest
 {
+    use HttpMessageSendingTrait;
+
     public function sendData($data)
     {
     }

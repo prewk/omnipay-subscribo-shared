@@ -4,7 +4,6 @@ use Omnipay\Common\Message\AbstractRequest as Base;
 use Omnipay\Common\CreditCard;
 use Omnipay\Common\ItemBag;
 use Subscribo\Omnipay\Shared\CreditCard as ExtendedCreditCard;
-use Subscribo\Omnipay\Shared\Traits\HttpMessageSendingTrait;
 use Subscribo\Omnipay\Shared\ItemBag as ExtendedItemBag;
 
 
@@ -18,8 +17,6 @@ use Subscribo\Omnipay\Shared\ItemBag as ExtendedItemBag;
  */
 abstract class AbstractRequest extends Base
 {
-    use HttpMessageSendingTrait;
-
     /**
      * @param CreditCard|\Subscribo\Omnipay\Shared\CreditCard|array $value
      * @return $this

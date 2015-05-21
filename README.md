@@ -14,23 +14,28 @@
 
 ## Installing
 
-Add dependency on this package as well to your Omnipay driver composer.json.
-You might need to add dependency to development version of egeloen/http-adapter package both to your driver and your project
+Add dependency on this package to your Omnipay driver composer.json.
+
+You might need to add also dependencies to packages psr/http-message and development version of egeloen/http-adapter
+both to your driver and your project, if you are using protected method HttpMessageSendingTrait::sendHttpMessage()
 (and add recommendation for others to do so in your driver's README.md):
 
 ```json
     "require": {
-        "subscribo/omnipay-subscribo-shared": "^0.2.3",
-        "egeloen/http-adapter": "^0.8@dev"
+        "subscribo/omnipay-subscribo-shared": "^0.3.0",
+        "egeloen/http-adapter": "^0.8@dev",
+        "psr/http-message": "^1.0"
     }
 ```
 
 ## Usage
 
 You can extend abstract classes provided by this package,
-use CreditCard class provided by this package
+use CreditCard and/or Item and ItemBag classes provided by this package,
+use Widget base functionality provided by this package,
 use trait HttpMessageSendingTrait (for PSR-7 http message sending)
-or use helper GuzzleClientHelper (for httpClient logging using PSR-3 logger)
+use helper GuzzleClientHelper (for httpClient logging using PSR-3 logger)
+or use helper AddressParser (for parsing of first line of address)
 
 ## Contributing
 
