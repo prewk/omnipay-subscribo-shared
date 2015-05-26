@@ -10,7 +10,7 @@ php:
 install:
   - composer update
 
-script: phpunit --coverage-text
+script: phpunit --coverage-text --colors
 
 notifications:
   email:
