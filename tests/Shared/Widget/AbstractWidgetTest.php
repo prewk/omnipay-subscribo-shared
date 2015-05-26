@@ -146,6 +146,16 @@ class AbstractWidgetTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedValue2, $widget->render());
     }
 
+
+    public function testAlternateRenderingMethod()
+    {
+        $widget = new ExtendedAbstractWidgetForTesting();
+        $this->assertSame('some value', $widget->renderFromArray(['someArrayParameter' => ['some', 'value']]));
+        $this->assertSame($widget, $widget->setSomeArrayParameter(['another', 'value']));
+        $this->assertSame('another value', $widget->renderFromArray());
+        $this->assertSame('some value', $widget->renderFromArray(['someArrayParameter' => ['some', 'value']]));
+    }
+
     /**
      * @expectedException \Subscribo\Omnipay\Shared\Exception\WidgetInvalidRenderingParametersException
      * @expectedExceptionMessage Parameter 'simpleParameter' is required
@@ -165,6 +175,16 @@ class AbstractWidgetTest extends PHPUnit_Framework_TestCase
         $widget = new ExtendedAbstractWidgetForTesting();
         $widget->render('wrong parameter');
     }
+
+    /**
+     * @expectedException \Subscribo\Omnipay\Shared\Exception\WidgetInvalidRenderingParametersException
+     * @expectedExceptionMessage Parameter 'someArrayParameter' is required
+     */
+    public function testExceptionForAlternativeRenderingMethod()
+    {
+        $widget = new ExtendedAbstractWidgetForTesting();
+        $widget->renderFromArray();
+    }
 }
 
 
@@ -183,6 +203,13 @@ class ExtendedAbstractWidgetForTesting extends AbstractWidget
     {
         $parameters = $this->checkParameters($parameters);
         return 'Simple parameter is '.$parameters['simpleParameter'];
+    }
+
+
+    public function renderFromArray($parameters = [])
+    {
+        $parameters = $this->checkParameters($parameters, ['someArrayParameter']);
+        return implode(' ', $parameters['someArrayParameter']);
     }
 
 

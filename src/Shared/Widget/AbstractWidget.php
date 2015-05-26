@@ -33,15 +33,16 @@ abstract class AbstractWidget extends AbstractBasicWidget
      * Merges provided parameters with those from objects and checks them
      *
      * @param array $parameters
+     * @param bool|array $requirements - required parameter names or true for getting them from getRequiredParameters()
      * @return array
      * @throws \Subscribo\Omnipay\Shared\Exception\WidgetInvalidRenderingParametersException
      */
-    protected function checkParameters($parameters)
+    protected function checkParameters($parameters, $requirements = true)
     {
         if (is_array($parameters)) {
             $parameters = array_replace($this->getParameters(), $parameters);
         }
-        $obstacles = $this->collectRenderingObstacles($parameters);
+        $obstacles = $this->collectRenderingObstacles($parameters, $requirements);
         if ($obstacles) {
             throw new WidgetInvalidRenderingParametersException(reset($obstacles));
         }
