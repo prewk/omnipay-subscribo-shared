@@ -17,7 +17,15 @@ class AddressParser
     public static function parseFirstLine($firstLine)
     {
         $parts = preg_split('/\\s/', $firstLine, null, PREG_SPLIT_NO_EMPTY);
-        $street = array_shift($parts);
+
+        if (count($parts) < 2) {
+            preg_match('/\d+[^\d]+/', $firstLine, $house);
+
+            $parts[0] = trim(strstr($firstLine, $house[0], true));
+            $parts[1] = trim($house[0]);
+        }
+
+        $street = str_replace(',', '', array_shift($parts));
         $houseNumber = null;
         if (static::couldBePartOfHouseNumber(end($parts))) {
             $houseNumber = array_pop($parts);
