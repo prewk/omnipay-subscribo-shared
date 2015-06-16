@@ -27,5 +27,11 @@ class AddressParserTest extends PHPUnit_Framework_TestCase
         $this->assertSame(['Meierskamp','31b'], AddressParser::parseFirstLine('Meierskamp31b'));
         $this->assertSame(['Meierskamp','31b'], AddressParser::parseFirstLine('Meierskamp,31b'));
         $this->assertSame(['Meierskamp','315XI'], AddressParser::parseFirstLine('Meierskamp315XI'));
+
+        $this->assertSame(['Hauptstraße', '12'], AddressParser::parseFirstLine('Hauptstraße,12'));
+        $this->assertSame(['Hauptstraße', ''], AddressParser::parseFirstLine('Hauptstraße,'));
+        $this->assertSame(['Hauptstraße', null], AddressParser::parseFirstLine('Hauptstraße'));
+        $this->assertSame(['Hauptstraße', '12'], AddressParser::parseFirstLine('Hauptstraße,,,12'));
+        $this->assertSame(['Hauptstraße', '12'], AddressParser::parseFirstLine('Hauptstraße12'));
     }
 }
