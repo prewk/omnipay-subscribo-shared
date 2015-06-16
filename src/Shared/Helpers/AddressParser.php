@@ -16,16 +16,8 @@ class AddressParser
      */
     public static function parseFirstLine($firstLine)
     {
-        $parts = preg_split('/\\s/', $firstLine, null, PREG_SPLIT_NO_EMPTY);
-
-        if (count($parts) < 2) {
-            preg_match('/\d+[^\d]+/', $firstLine, $house);
-
-            $parts[0] = trim(strstr($firstLine, $house[0], true));
-            $parts[1] = trim($house[0]);
-        }
-
-        $street = str_replace(',', '', array_shift($parts));
+        $parts = static::splitFirstLine($firstLine);
+        $street = array_shift($parts);
         $houseNumber = null;
         if (static::couldBePartOfHouseNumber(end($parts))) {
             $houseNumber = array_pop($parts);
@@ -47,7 +39,31 @@ class AddressParser
         while ($parts) {
             $street .= ' '.array_shift($parts);
         }
+        $street = trim($street);
+        if ($houseNumber) {
+            $houseNumber = trim($houseNumber);
+        }
         return [$street, $houseNumber];
+    }
+
+    /**
+     * Tries to split first line into parts
+     *
+     * @param string $firstLine
+     * @return array
+     */
+    protected static function splitFirstLine($firstLine)
+    {
+        $parts = preg_split('/\\s/', $firstLine, null, PREG_SPLIT_NO_EMPTY);
+        if (count($parts) > 1) {
+            return $parts;
+        }
+        $parts = explode(',', $firstLine);
+        if (count($parts) > 1) {
+            return $parts;
+        }
+
+        return preg_split('/(\\d+\\D*)/', $firstLine, null, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
     }
 
     /**
