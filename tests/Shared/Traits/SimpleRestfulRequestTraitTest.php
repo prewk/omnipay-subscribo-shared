@@ -22,6 +22,7 @@ class SimpleRestfulRequestTraitTest extends TestCase
         );
     }
 
+
     public function testSendSimpleGet()
     {
         $this->setMockHttpResponse('successResponse.txt');
@@ -37,7 +38,6 @@ class SimpleRestfulRequestTraitTest extends TestCase
         /** @var $response \Subscribo\Omnipay\Shared\Interfaces\RestfulResponseInterface */
         $this->assertSame(200, $response->getHttpResponseStatusCode());
     }
-
 
     /**
      * @expectedException \Subscribo\Omnipay\Shared\Exception\TransportErrorHttpMessageSendingException
@@ -65,6 +65,7 @@ class SimpleRestfulRequestTraitTest extends TestCase
         /** @var $response \Subscribo\Omnipay\Shared\Interfaces\RestfulResponseInterface */
         $this->assertSame(500, $response->getHttpResponseStatusCode());
     }
+
 
     public function testSendClientErrorReceived()
     {
@@ -97,6 +98,7 @@ class SimpleRestfulRequestTraitTest extends TestCase
         $this->assertSame(100, $response->getHttpResponseStatusCode());
     }
 
+
     public function testSendBadRequestResponse()
     {
         $this->setMockHttpResponse('badRequestResponse.txt');
@@ -112,6 +114,7 @@ class SimpleRestfulRequestTraitTest extends TestCase
         $this->assertSame(400, $response->getHttpResponseStatusCode());
     }
 
+
     public function testProtectedMethods()
     {
         $data = ['some key' => 'some value'];
@@ -119,6 +122,9 @@ class SimpleRestfulRequestTraitTest extends TestCase
         $this->assertSame([], $this->request->testGetHttpRequestQueryParameters($data));
         $this->assertSame([], $this->request->testGetHttpRequestHeaders($data));
         $this->assertNull($this->request->testGetHttpRequestMethod($data));
+        $this->assertSame('Response placeholder', $this->request->testProcessHttpResponse('Response placeholder'));
+        $responseMock = $this->getMockForAbstractClass('Psr\\Http\\Message\\ResponseInterface', [], '', false);
+        $this->assertSame($responseMock, $this->request->testProcessHttpResponse($responseMock));
     }
 }
 
@@ -166,5 +172,11 @@ class ClassUsingSimpleRestfulRequestTraitForTesting extends AbstractRequest
     public function testGetHttpRequestMethod($data)
     {
         return $this->getHttpRequestMethod($data);
+    }
+
+
+    public function testProcessHttpResponse($response)
+    {
+        return $this->processHttpResponse($response);
     }
 }

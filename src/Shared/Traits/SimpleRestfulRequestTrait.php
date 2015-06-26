@@ -65,6 +65,17 @@ trait SimpleRestfulRequestTrait
         return null;
     }
 
+    /**
+     * Allows fixes or other processing to returned httpResponse, before it gets parsed
+     *
+     * @param \Psr\Http\Message\ResponseInterface $httpResponse
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    protected function processHttpResponse($httpResponse)
+    {
+        return $httpResponse;
+    }
+
     public function sendData($data)
     {
         $httpRequest = RequestFactory::make(
@@ -76,9 +87,11 @@ trait SimpleRestfulRequestTrait
         );
         $httpResponse = $this->sendHttpMessage($httpRequest, false);
 
+        $processedHttpResponse = $this->processHttpResponse($httpResponse);
+
         $this->response = $this->createResponse(
-            ResponseParser::extractDataFromResponse($httpResponse),
-            $httpResponse->getStatusCode()
+            ResponseParser::extractDataFromResponse($processedHttpResponse),
+            $processedHttpResponse->getStatusCode()
         );
 
         return $this->response;

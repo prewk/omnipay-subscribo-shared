@@ -1,6 +1,6 @@
 {
     "name": "subscribo/omnipay-subscribo-shared",
-    "description": "Package with shared functionality for some Omnipay drivers",
+    "description": "Package with shared functionality for some Omnipay payment processing library drivers",
     "keywords": [
         "Omnipay",
         "driver",
