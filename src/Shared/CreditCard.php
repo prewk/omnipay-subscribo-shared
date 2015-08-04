@@ -25,8 +25,8 @@ use Omnipay\Common\CreditCard as Base;
  */
 class CreditCard extends Base
 {
-    const GENDER_MALE = 'GENDER_MALE';
-    const GENDER_FEMALE = 'GENDER_FEMALE';
+    const GENDER_MALE = 'MALE_GENDER';
+    const GENDER_FEMALE = 'FEMALE_GENDER';
 
     const MODE_FILTER_EMPTY_VALUES = 'filter_empty_values';
     const MODE_FILTER_EMPTY_WHEN_STRING_VALUES = 'filter_empty_when_string_values';
