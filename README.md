@@ -28,7 +28,7 @@ if you are using protected method HttpMessageSendingTrait::sendHttpMessage()
     "require": {
         "subscribo/omnipay-subscribo-shared": "^0.3.6",
         "egeloen/http-adapter": "~0.8.0",
-        "psr/http-message": "~1.0.0"
+        "psr/http-message": "~1.0"
     }
 ```
 
